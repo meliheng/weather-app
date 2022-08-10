@@ -1,4 +1,4 @@
-# Getting Started with Create React App
+# Weather App
 
 This project was developed with [React Framework](https://github.com/facebook/create-react-app).
 
