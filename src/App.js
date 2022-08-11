@@ -21,6 +21,12 @@ function App() {
 	const handleSelectedCity = (event) => {
 		setCity(event.target.value);
 	};
+	const removeCity = (cityName) => {
+		let citiesArray = JSON.parse(localStorage.getItem('cities'));
+		citiesArray.splice(citiesArray.indexOf(cityName), 1);
+		localStorage.setItem('cities', JSON.stringify(citiesArray));
+		setStorageCities(JSON.parse(localStorage.getItem('cities')));
+	};
 	return (
 		<div
 			className='App'
@@ -35,7 +41,7 @@ function App() {
 				<ChooseCard handleSelectedCity={handleSelectedCity} city={city} />
 				{storageCities &&
 					storageCities.map((c, index) => {
-						return <WeatherCard city={c} key={index} />;
+						return <WeatherCard city={c} key={index} removeCity={removeCity} />;
 					})}
 			</div>
 		</div>

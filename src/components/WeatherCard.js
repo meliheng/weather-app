@@ -3,10 +3,11 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
+import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import useSWR from 'swr';
 
 const fetcher = (url) => fetch(url).then((res) => res.json());
-export default function WeatherCard({ city }) {
+export default function WeatherCard({ city, removeCity }) {
 	const { data, error } = useSWR(
 		`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${process.env.REACT_APP_API_KEY}&lang=tr&units=metric`,
 		fetcher
@@ -47,6 +48,10 @@ export default function WeatherCard({ city }) {
 				sx={{ width: 100, marginLeft: 'auto' }}
 				image={`https://openweathermap.org/img/wn/${icon}@2x.png`}
 				alt='Live from space album cover'
+			/>
+			<DeleteOutlineIcon
+				onClick={() => removeCity(city)}
+				sx={{ cursor: 'pointer' }}
 			/>
 		</Card>
 	);
