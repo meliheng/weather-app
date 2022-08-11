@@ -51,7 +51,10 @@ export default function WeatherCard({ city, removeCity }) {
 			/>
 			<DeleteOutlineIcon
 				onClick={() => removeCity(city)}
-				sx={{ cursor: 'pointer' }}
+				sx={{
+					cursor: 'pointer',
+					':hover': { color: 'red' },
+				}}
 			/>
 		</Card>
 	);
