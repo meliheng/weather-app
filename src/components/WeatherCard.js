@@ -31,7 +31,7 @@ export default function WeatherCard({ city }) {
 						color='text.secondary'
 						component='div'
 					>
-						{temp}
+						{temp} &#176;
 					</Typography>
 					<Typography
 						variant='subtitle1'
