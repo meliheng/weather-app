@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import './App.css';
 import ChooseCard from './components/ChooseCard';
 import WeatherCard from './components/WeatherCard';
+import { data2, getLocation } from './apiService';
 
 function App() {
 	const [city, setCity] = useState('');
@@ -9,6 +10,15 @@ function App() {
 		JSON.parse(localStorage.getItem('cities'))
 	);
 
+	useEffect(() => {
+		if (storageCities === null) {
+			getLocation();
+			let arr = [];
+			arr.push(data2);
+			localStorage.setItem('cities', JSON.stringify(arr));
+			setStorageCities(JSON.parse(localStorage.getItem('cities')));
+		}
+	}, []);
 	useEffect(() => {
 		let citiesArray = JSON.parse(localStorage.getItem('cities')) || [];
 		if (!citiesArray.includes(city) && city !== '') {
@@ -45,6 +55,7 @@ function App() {
 					})}
 			</div>
 		</div>
+		//<GeoLocation />
 	);
 }
 
