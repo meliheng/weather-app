@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import './App.css';
 import ChooseCard from './components/ChooseCard';
 import WeatherCard from './components/WeatherCard';
-import { data2, getLocation } from './apiService';
+import { getLocation } from './apiService';
 
 function App() {
 	const [city, setCity] = useState('');
@@ -11,12 +11,11 @@ function App() {
 	);
 
 	useEffect(() => {
-		if (storageCities === null) {
-			getLocation();
-			let arr = [];
-			arr.push(data2);
-			localStorage.setItem('cities', JSON.stringify(arr));
-			setStorageCities(JSON.parse(localStorage.getItem('cities')));
+		if (!JSON.parse(localStorage.getItem('cities'))) {
+			const fetchCity = async () => {
+				setCity(await getLocation());
+			};
+			fetchCity();
 		}
 	}, []);
 	useEffect(() => {
